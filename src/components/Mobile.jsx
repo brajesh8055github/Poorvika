@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const mobile = [
   { image: './Images/1.webp' },
   { image: './Images/2.webp' },
@@ -11,7 +11,7 @@ const products = [
     id: 1,
     name: "Realme 14x 5G",
     description: "Golden Glow, 8GB-128GB",
-    price: "₹15,999",
+    price: 15999,
     discount: "Save ₹2,000",
     image: "./Images/Phone1.png",
   },
@@ -19,7 +19,7 @@ const products = [
     id: 2,
     name: "Apple iPhone 16",
     description: "Teal, 128GB",
-    price: "₹73,999",
+    price: 73999,
     discount: "Save ₹6,000",
     image: "./Images/Phone2.png",
 
@@ -28,7 +28,7 @@ const products = [
     id: 3,
     name: "Redmi Note 14 Pro 5G",
     description: "Ivy Green, 8GB-256GB",
-    price: "₹26,999",
+    price: 26999,
     discount: "Save ₹4,000",
     image: "./Images/Phone3.png",
 
@@ -37,7 +37,7 @@ const products = [
     id: 4,
     name: "Samsung Galaxy S24 5G",
     description: "Marble Grey, 8GB-256GB",
-    price: "₹79,999",
+    price: 79999,
     discount: "Save ₹4,000",
     image: "./Images/Phone4.png",
 
@@ -46,7 +46,7 @@ const products = [
     id: 5,
     name: "Redmi Note 14 Pro Plus 5G",
     description: "Spectre Blue, 12GB-512GB",
-    price: "₹35,999",
+    price: 35999,
     discount: "Save ₹4,000",
     image: "./Images/Phone5.png",
 
@@ -55,7 +55,7 @@ const products = [
     id: 6,
     name: "Vivo Y300 5G",
     description: "Emerald Green, 8GB-128GB",
-    price: "₹21,999",
+    price: 21999,
     discount: "Save ₹3,000",
     image: "./Images/Phone6.png",
 
@@ -64,14 +64,63 @@ const products = [
     id: 7,
     name: "Vivo Y300 5G",
     description: "Emerald Green, 8GB-128GB",
-    price: "₹21,999",
-    discount: "Save ₹3,000",
+    price: 21999,
+    discount: "Save ₹3000",
     image: "./Images/Phone7.png",
+
+  },
+  {
+    id: 8,
+    name: "Apple iPhone 16",
+    description: "Teal, 128GB",
+    price: 73999,
+    discount: "Save ₹6,000",
+    image: "./Images/Phone2.png",
+
+  },
+  {
+    id: 9,
+    name: "Redmi Note 14 Pro 5G",
+    description: "Ivy Green, 8GB-256GB",
+    price: 26999,
+    discount: "Save ₹4,000",
+    image: "./Images/Phone3.png",
+
+  },
+  {
+    id: 10,
+    name: "Samsung Galaxy S24 5G",
+    description: "Marble Grey, 8GB-256GB",
+    price: 79999,
+    discount: "Save ₹4,000",
+    image: "./Images/Phone4.png",
+
+  },
+  {
+    id: 11,
+    name: "Redmi Note 14 Pro Plus 5G",
+    description: "Spectre Blue, 12GB-512GB",
+    price: 35999,
+    discount: "Save ₹4,000",
+    image: "./Images/Phone5.png",
 
   },
 ];
 
 const Mobile = () => {
+  const navigate = useNavigate();
+  function CardHandler(product) {
+    navigate('/mobile-details', {
+        state: {
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            image: product.image,
+        }
+    });
+}
+
+
   return (
     <>
       <div className="bg-gray-100">
@@ -103,7 +152,7 @@ const Mobile = () => {
           {/* Cards Section */}
           <div className="md:col-span-2 grid grid-cols-2 gap-4">
             {mobile.map((item, index) => (
-              <div key={index} className="shadow-md text-center">
+              <div key={index} className="shadow-md text-center" >
                 <div className="text-lg font-semibold">{item.title}</div>
                 <img
                   src={item.image}
@@ -126,11 +175,11 @@ const Mobile = () => {
       </div>
       <div className="p-4">
         <h2 className="text-xl font-bold mb-4">5G Mobile Phones</h2>
-        <div className="flex space-x-4 overflow-x-auto scrollbar-hide">
+        <div className="flex space-x-4 overflow-x-auto scrollbar-hide mobile">
           {products.map((product) => (
             <div
               key={product.id}
-              className="min-w-[200px] bg-white shadow-md rounded-md p-4 flex-shrink-0"
+              className="min-w-[200px] bg-white shadow-md rounded-md p-4 flex-shrink-0 cursor-pointer" onClick={()=>CardHandler(product)}
             >
               <img
                 src={product.image}
@@ -141,7 +190,7 @@ const Mobile = () => {
               <p className="text-sm text-gray-500">{product.description}</p>
               <div className="flex items-center justify-between mt-2">
                 <span className="text-lg font-bold text-orange-500">
-                  {product.price}
+                ₹{product.price}
                 </span>
                 <span className="text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
                   {product.discount}

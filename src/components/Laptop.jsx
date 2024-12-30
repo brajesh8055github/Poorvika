@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const products = [
   {
     id: 1,
     name: "Apple MacBook Air M2",
     description: "Space Gray, 8GB-256GB SSD",
-    price: "₹99,999",
+    price: 99999,
     discount: "Save ₹5,000",
     image: "./Images/Laptop1.png",
   },
@@ -12,7 +12,7 @@ const products = [
     id: 2,
     name: "Dell XPS 13",
     description: "Platinum Silver, 16GB-512GB SSD",
-    price: "₹1,29,999",
+    price: 129999,
     discount: "Save ₹10,000",
     image: "./Images/Laptop2.png",
   },
@@ -20,7 +20,7 @@ const products = [
     id: 3,
     name: "HP Spectre x360",
     description: "Nightfall Black, 16GB-1TB SSD",
-    price: "₹1,45,999",
+    price: 145999,
     discount: "Save ₹8,000",
     image: "./Images/Laptop3.png",
   },
@@ -28,7 +28,7 @@ const products = [
     id: 4,
     name: "Lenovo ThinkPad X1 Carbon",
     description: "Carbon Black, 16GB-512GB SSD",
-    price: "₹1,39,999",
+    price: 139999,
     discount: "Save ₹7,000",
     image: "./Images/Laptop4.png",
   },
@@ -36,7 +36,7 @@ const products = [
     id: 5,
     name: "Asus ROG Zephyrus G14",
     description: "Eclipse Gray, 16GB-1TB SSD",
-    price: "₹1,49,999",
+    price: 149999,
     discount: "Save ₹10,000",
     image: "./Images/Laptop5.png",
   },
@@ -44,7 +44,7 @@ const products = [
     id: 6,
     name: "Acer Swift 5",
     description: "Mist Green, 16GB-512GB SSD",
-    price: "₹89,999",
+    price: 89999,
     discount: "Save ₹6,000",
     image: "./Images/Laptop6.png",
   },
@@ -52,15 +52,15 @@ const products = [
     id: 7,
     name: "MSI Stealth 15M",
     description: "Camo Green, 16GB-1TB SSD",
-    price: "₹1,35,999",
+    price: 135999,
     discount: "Save ₹9,000",
     image: "./Images/Laptop7.png",
   },
   {
-    id: 4,
+    id: 8,
     name: "Lenovo ThinkPad X1 Carbon",
     description: "Carbon Black, 16GB-512GB SSD",
-    price: "₹1,39,999",
+    price: 139999,
     discount: "Save ₹7,000",
     image: "./Images/Laptop8.jpeg",
   },
@@ -68,6 +68,19 @@ const products = [
 
 
 const Laptop = () => {
+
+  const navigate = useNavigate();
+  function CardHandler(product) {
+    navigate('/mobile-details', {
+        state: {
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            image: product.image,
+        }
+    });
+}
+
   return (
     <>
       <div className="bg-gray-100">
@@ -138,11 +151,11 @@ const Laptop = () => {
 
       <div className="p-4">
         <h2 className="text-xl font-bold mb-4">Laptops</h2>
-        <div className="flex space-x-4 overflow-x-auto scrollbar-hide">
+        <div className="flex space-x-4 overflow-x-auto scrollbar-hide laptop">
           {products.map((product) => (
             <div
               key={product.id}
-              className="min-w-[200px] bg-white shadow-md rounded-md p-4 flex-shrink-0"
+              className="min-w-[200px] bg-white shadow-md rounded-md p-4 flex-shrink-0 cursor-pointer" onClick={()=>CardHandler(product)}
             >
               <img
                 src={product.image}
@@ -153,7 +166,7 @@ const Laptop = () => {
               <p className="text-sm text-gray-500">{product.description}</p>
               <div className="flex items-center justify-between mt-2">
                 <span className="text-lg font-bold text-orange-500">
-                  {product.price}
+                ₹{product.price}
                 </span>
                 <span className="text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
                   {product.discount}

@@ -2,3 +2,9 @@
 body{
   font-family: "Poppins", serif;
 }
+.mobile::-webkit-scrollbar {
+  display: none;
+}
+.laptop::-webkit-scrollbar {
+  display: none;
+}
