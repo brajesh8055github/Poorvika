@@ -6,6 +6,7 @@ import Navbar from './Components/Navbar'
 import Mobile from './components/Mobile'
 import Laptop from './components/Laptop'
 import Checkout from './components/Checkout'
+import Cart from './components/Cart'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home/>}></Route>
+        <Route path="/cart" element={<Cart />} />
         <Route path="/mobile-details" element={<MobileDetails/>}></Route>
         <Route path="/mobiles" element={<Mobile/>}></Route>
         <Route path="/computers" element={<Laptop/>}></Route>

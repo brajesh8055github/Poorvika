@@ -1,4 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Footer from "./Footer";
 const mobile = [
   { image: './Images/1.webp' },
   { image: './Images/2.webp' },
@@ -109,97 +111,102 @@ const products = [
 
 const Mobile = () => {
   const navigate = useNavigate();
-  function CardHandler(product) {
-    navigate('/mobile-details', {
-        state: {
-            name: product.name,
-            price: product.price,
-            description: product.description,
-            image: product.image,
-        }
-    });
-}
 
+  const CardHandler = (product) => {
+    navigate("/mobile-details", {
+      state: {
+        name: product.name,
+        price: product.price,
+        description: product.description,
+        image: product.image,
+      },
+    });
+  };
+
+  const scrollLeft = () => {
+    const container = document.querySelector(".laptop");
+    container.scrollBy({ left: -200, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    const container = document.querySelector(".laptop");
+    container.scrollBy({ left: 200, behavior: "smooth" });
+  };
 
   return (
     <>
       <div className="bg-gray-100">
         <div className="flex flex-col md:flex-row md:justify-between items-center p-4 bg-gray-100">
           <header className="text-red-600 text-2xl font-bold mb-4 md:mb-0">
-            Mobiles & Accessories
+            Laptop & Tablets
           </header>
 
           {/* Navigation Links */}
           <div className="flex flex-wrap gap-4 text-sm md:text-base">
             <Link to="/" className="hover:text-red-600 border-black border-r-2 px-2">
-              Best Seller
+              Best Laptops
             </Link>
             <Link to="/" className="hover:text-red-600 border-black border-r-2 px-2">
-              5G Mobiles
+              Desktop Pc
             </Link>
             <Link to="/" className="hover:text-red-600 border-black border-r-2 px-2">
-              Top Brands
+              iPad & Tablets
             </Link>
-            <Link to="/" className="hover:text-red-600 ">
+            <Link to="/" className="hover:text-red-600">
               Accessories
             </Link>
           </div>
         </div>
+      </div>
 
+      <div className="p-4">
+        <h2 className="text-xl font-bold mb-4">Laptops</h2>
+        <div className="relative flex items-center">
+          {/* Left Button */}
+          <button
+            onClick={scrollLeft}
+            className="absolute left-0 z-10 bg-white rounded-full shadow-md p-2 text-gray-700 hover:bg-gray-100"
+          >
+            <FaChevronLeft size={20} />
+          </button>
 
-
-        <div className="grid md:grid-cols-3 gap-4 p-4">
-          {/* Cards Section */}
-          <div className="md:col-span-2 grid grid-cols-2 gap-4">
-            {mobile.map((item, index) => (
-              <div key={index} className="shadow-md text-center" >
-                <div className="text-lg font-semibold">{item.title}</div>
+          {/* Product Cards */}
+          <div className="flex space-x-4 overflow-x-auto scrollbar-hide laptop">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="min-w-[200px] bg-white shadow-md rounded-md p-4 flex-shrink-0 cursor-pointer"
+                onClick={() => CardHandler(product)}
+              >
                 <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-40 object-cover"
+                  src={product.image}
+                  alt={product.name}
+                  className="h-40 w-full object-cover rounded-md"
                 />
+                <h3 className="text-md font-semibold mt-2">{product.name}</h3>
+                <p className="text-sm text-gray-500">{product.description}</p>
+                <div className="flex items-center justify-between mt-2">
+                  <span className="text-lg font-bold text-orange-500">
+                    ₹{product.price}
+                  </span>
+                  <span className="text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
+                    {product.discount}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
 
-          {/* Right Side Image */}
-          <div className="flex items-center justify-center">
-            <img
-              src="./Images/Iphone.webp"
-              alt="iPhone"
-              className="w-full h-full object-cover rounded-md"
-            />
-          </div>
+          {/* Right Button */}
+          <button
+            onClick={scrollRight}
+            className="absolute right-0 z-10 bg-white rounded-full shadow-md p-2 text-gray-700 hover:bg-gray-100"
+          >
+            <FaChevronRight size={20} />
+          </button>
         </div>
       </div>
-      <div className="p-4">
-        <h2 className="text-xl font-bold mb-4">5G Mobile Phones</h2>
-        <div className="flex space-x-4 overflow-x-auto scrollbar-hide mobile">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="min-w-[200px] bg-white shadow-md rounded-md p-4 flex-shrink-0 cursor-pointer" onClick={()=>CardHandler(product)}
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="h-40 w-full object-cover rounded-md"
-              />
-              <h3 className="text-md font-semibold mt-2">{product.name}</h3>
-              <p className="text-sm text-gray-500">{product.description}</p>
-              <div className="flex items-center justify-between mt-2">
-                <span className="text-lg font-bold text-orange-500">
-                ₹{product.price}
-                </span>
-                <span className="text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
-                  {product.discount}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Footer/>
     </>
   );
 };

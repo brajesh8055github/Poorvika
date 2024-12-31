@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Footer from "./Footer";
 
 const Checkout = () => {
   const location = useLocation();
@@ -117,6 +118,7 @@ const Checkout = () => {
         </button>
       </form>
     </div>
+    <Footer/>
     </>
   );
 };

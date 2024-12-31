@@ -3,6 +3,7 @@ import Mobile from './Mobile'
 import Laptop from './Laptop'
 import Slider from './Slider'
 import Baneer from './Banner'
+import Footer from './Footer'
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
         <Slider />
       <Mobile />
       <Laptop />
+      <Footer/>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 const LaptopDetails = () => {
     const location = useLocation();
      const navigate = useNavigate();
@@ -84,6 +85,7 @@ const LaptopDetails = () => {
           </div>
         </div>
       </div>
+      <Footer/>
       </>
     );
   };
