@@ -1,4 +1,5 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const ImageSlider = () => {
   const images = [
@@ -15,10 +16,10 @@ const ImageSlider = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000); // Change image every 3 seconds
+    }, 3000); 
 
-    return () => clearInterval(interval); 
-  }, []);
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   return (
     <div className="relative w-full mx-auto">
@@ -37,18 +38,20 @@ const ImageSlider = () => {
           ))}
         </div>
       </div>
+
+      {/* Navigation Buttons */}
       <div className="absolute inset-0 flex items-center justify-between px-4">
         <button
           onClick={() => setCurrentIndex((currentIndex - 1 + images.length) % images.length)}
-          className="bg-gray-800 text-white rounded-full p-2 shadow-lg"
+          className="bg-gray-800 text-white rounded-full p-2 shadow-lg hover:bg-gray-700"
         >
-          &#10094;
+          <FaChevronLeft size={20} />
         </button>
         <button
           onClick={() => setCurrentIndex((currentIndex + 1) % images.length)}
-          className="bg-gray-800 text-white rounded-full p-2 shadow-lg"
+          className="bg-gray-800 text-white rounded-full p-2 shadow-lg hover:bg-gray-700"
         >
-          &#10095;
+          <FaChevronRight size={20} />
         </button>
       </div>
     </div>

@@ -63,7 +63,15 @@ const Navbar = () => {
                     <Link to="/" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>Delivery to <span>Patna</span></Link>
                     <Link to="/" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>About</Link>
                     <Link to="/" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>Locate Stores</Link>
-                    <Link to="/" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>0 Items</Link>
+                    {/* <Link to="/" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>0 Items</Link> */}
+                    <Link to="/cart" className="relative text-white hover:text-gray-900">
+          <span className="text-lg">Cart</span>
+          {totalItems > 0 && (
+            <span className="absolute -top-2 -right-3 bg-red-500 text-white text-sm rounded-full px-2 py-1">
+              {totalItems}
+            </span>
+          )}
+        </Link>
                     <Link to="/" className="text-gray-700 hover:text-gray-900" onClick={toggleMenu}>My account</Link>
                 </div>
             )}

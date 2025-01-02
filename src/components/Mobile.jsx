@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import Footer from "./Footer";
 const mobile = [
   { image: './Images/1.webp' },
   { image: './Images/2.webp' },
@@ -113,7 +112,8 @@ const Mobile = () => {
   const navigate = useNavigate();
 
   const CardHandler = (product) => {
-    navigate("/mobile-details", {
+    // navigate("/mobile-details", {
+    navigate("/item-details", {
       state: {
         name: product.name,
         price: product.price,
@@ -206,7 +206,7 @@ const Mobile = () => {
           </button>
         </div>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </>
   );
 };

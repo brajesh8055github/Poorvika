@@ -1,75 +1,50 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-// import Footer from "./Footer";
 
-const products = [
+const collections = [
   {
     id: 1,
-    name: "Apple MacBook Air M2",
-    description: "Space Gray, 8GB-256GB SSD",
-    price: 99999,
-    discount: "Save ₹5,000",
-    image: "./Images/Laptop1.png",
+    name: "Apple watch series 10 gps",
+    description: "Smart watch cellular silver aluminum",
+    price: 154999,
+    discount: "Save ₹20,000",
+    image: "./Images/Latest1.png",
   },
   {
     id: 2,
-    name: "Dell XPS 13",
-    description: "Platinum Silver, 16GB-512GB SSD",
-    price: 129999,
-    discount: "Save ₹10,000",
-    image: "./Images/Laptop2.png",
+    name: "Haier hd ready smart TV",
+    description: "Smart TV 32 inch",
+    price: 29999,
+    discount: "Save ₹3,000",
+    image: "./Images/Latest2.png",
   },
   {
     id: 3,
-    name: "HP Spectre x360",
-    description: "Nightfall Black, 16GB-1TB SSD",
-    price: 145999,
-    discount: "Save ₹8,000",
-    image: "./Images/Laptop3.png",
+    name: "Samsung galaxy watch",
+    description: "GPS, 41mm Midnight ultra lte titanium gray",
+    price: 45999,
+    discount: "Save ₹5,000",
+    image: "./Images/Latest3.png",
   },
   {
     id: 4,
-    name: "Lenovo ThinkPad X1 Carbon",
-    description: "Carbon Black, 16GB-512GB SSD",
-    price: 139999,
-    discount: "Save ₹7,000",
-    image: "./Images/Laptop4.png",
+    name: "Sony Bravia 8xr 4k ultra",
+    description: "HD smart android TV",
+    price: 299999,
+    discount: "Save ₹50,000",
+    image: "./Images/Latest4.png",
   },
   {
-    id: 5,
-    name: "Asus ROG Zephyrus G14",
-    description: "Eclipse Gray, 16GB-1TB SSD",
-    price: 149999,
-    discount: "Save ₹10,000",
-    image: "./Images/Laptop5.png",
-  },
-  {
-    id: 6,
-    name: "Acer Swift 5",
-    description: "Mist Green, 16GB-512GB SSD",
-    price: 89999,
-    discount: "Save ₹6,000",
-    image: "./Images/Laptop6.png",
-  },
-  {
-    id: 7,
-    name: "MSI Stealth 15M",
-    description: "Camo Green, 16GB-1TB SSD",
-    price: 135999,
-    discount: "Save ₹9,000",
-    image: "./Images/Laptop7.png",
-  },
-  {
-    id: 8,
-    name: "Lenovo ThinkPad X1 Carbon",
-    description: "Carbon Black, 16GB-512GB SSD",
-    price: 139999,
-    discount: "Save ₹7,000",
-    image: "./Images/Laptop8.jpeg",
+    id: 4,
+    name: "Zebronics zeb ht100",
+    description: "Beard trimmer blach",
+    price: 299999,
+    discount: "Save ₹50,000",
+    image: "./Images/Latest5.png",
   },
 ];
 
-const Laptop = () => {
+const Latest = () => {
   const navigate = useNavigate();
 
   const CardHandler = (product) => {
@@ -84,12 +59,12 @@ const Laptop = () => {
   };
 
   const scrollLeft = () => {
-    const container = document.querySelector(".laptop");
+    const container = document.querySelector(".collection");
     container.scrollBy({ left: -200, behavior: "smooth" });
   };
 
   const scrollRight = () => {
-    const container = document.querySelector(".laptop");
+    const container = document.querySelector(".collection");
     container.scrollBy({ left: 200, behavior: "smooth" });
   };
 
@@ -98,29 +73,13 @@ const Laptop = () => {
       <div className="bg-gray-100">
         <div className="flex flex-col md:flex-row md:justify-between items-center p-4 bg-gray-100">
           <header className="text-red-600 text-2xl font-bold mb-4 md:mb-0">
-            Laptop & Tablets
+            Latest Collections
           </header>
-
-          {/* Navigation Links */}
-          <div className="flex flex-wrap gap-4 text-sm md:text-base">
-            <Link to="/" className="hover:text-red-600 border-black border-r-2 px-2">
-              Best Laptops
-            </Link>
-            <Link to="/" className="hover:text-red-600 border-black border-r-2 px-2">
-              Desktop Pc
-            </Link>
-            <Link to="/" className="hover:text-red-600 border-black border-r-2 px-2">
-              iPad & Tablets
-            </Link>
-            <Link to="/" className="hover:text-red-600">
-              Accessories
-            </Link>
-          </div>
         </div>
       </div>
 
       <div className="p-4">
-        <h2 className="text-xl font-bold mb-4">Laptops</h2>
+        <h2 className="text-xl font-bold mb-4">Explore the Latest</h2>
         <div className="relative flex items-center">
           {/* Left Button */}
           <button
@@ -131,8 +90,8 @@ const Laptop = () => {
           </button>
 
           {/* Product Cards */}
-          <div className="flex space-x-4 overflow-x-auto scrollbar-hide laptop">
-            {products.map((product) => (
+          <div className="flex space-x-4 overflow-x-auto scrollbar-hide collection">
+            {collections.map((product) => (
               <div
                 key={product.id}
                 className="min-w-[200px] bg-white shadow-md rounded-md p-4 flex-shrink-0 cursor-pointer"
@@ -166,9 +125,9 @@ const Laptop = () => {
           </button>
         </div>
       </div>
-      {/* <Footer/> */}
+      {/* <Footer /> */}
     </>
   );
 };
 
-export default Laptop;
+export default Latest;

@@ -8,3 +8,6 @@ body{
 .laptop::-webkit-scrollbar {
   display: none;
 }
+.collection::-webkit-scrollbar {
+  display: none;
+}
