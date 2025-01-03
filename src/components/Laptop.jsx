@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-// import Footer from "./Footer";
 
 const products = [
   {
@@ -79,6 +78,7 @@ const Laptop = () => {
         price: product.price,
         description: product.description,
         image: product.image,
+        discount: product.discount,
       },
     });
   };
@@ -103,16 +103,16 @@ const Laptop = () => {
 
           {/* Navigation Links */}
           <div className="flex flex-wrap gap-4 text-sm md:text-base">
-            <Link to="/" className="hover:text-red-600 border-black border-r-2 px-2">
+            <Link to="/computers" className="hover:text-red-600 border-black border-r-2 px-2">
               Best Laptops
             </Link>
-            <Link to="/" className="hover:text-red-600 border-black border-r-2 px-2">
+            <Link to="/computers" className="hover:text-red-600 border-black border-r-2 px-2">
               Desktop Pc
             </Link>
-            <Link to="/" className="hover:text-red-600 border-black border-r-2 px-2">
+            <Link to="/computers" className="hover:text-red-600 border-black border-r-2 px-2">
               iPad & Tablets
             </Link>
-            <Link to="/" className="hover:text-red-600">
+            <Link to="/computers" className="hover:text-red-600">
               Accessories
             </Link>
           </div>
@@ -132,29 +132,39 @@ const Laptop = () => {
 
           {/* Product Cards */}
           <div className="flex space-x-4 overflow-x-auto scrollbar-hide laptop">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="min-w-[200px] bg-white shadow-md rounded-md p-4 flex-shrink-0 cursor-pointer"
-                onClick={() => CardHandler(product)}
-              >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="h-40 w-full object-cover rounded-md"
-                />
-                <h3 className="text-md font-semibold mt-2">{product.name}</h3>
-                <p className="text-sm text-gray-500">{product.description}</p>
-                <div className="flex items-center justify-between mt-2">
-                  <span className="text-lg font-bold text-orange-500">
-                    ₹{product.price}
-                  </span>
-                  <span className="text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
-                    {product.discount}
-                  </span>
+            {products.map((product) => {
+              const discountedPrice = product.price - parseInt(product.discount.split("₹")[1].replace(",", ""));
+              const discountPercentage = ((parseInt(product.discount.split("₹")[1].replace(",", "")) / product.price) * 100).toFixed(1);
+
+              return (
+                <div
+                  key={product.id}
+                  className="min-w-[200px] bg-white shadow-md rounded-md p-4 flex-shrink-0 cursor-pointer"
+                  onClick={() => CardHandler(product)}
+                >
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-40 w-full object-cover rounded-md"
+                  />
+                  <h3 className="text-md font-semibold mt-2">{product.name}</h3>
+                  <p className="text-sm text-gray-500">{product.description}</p>
+                  <div className="flex items-center justify-between mt-2">
+                    <div>
+                      <span className="text-lg font-bold text-orange-500">
+                        ₹{discountedPrice}
+                      </span>
+                      <span className="text-sm text-gray-400 line-through ml-2">
+                        ₹{product.price}
+                      </span>
+                    </div>
+                    <span className="text-sm bg-black text-white px-2 py-1">
+                      {discountPercentage}% Off
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Right Button */}

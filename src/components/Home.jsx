@@ -9,12 +9,12 @@ import Latest from './Latest'
 const Home = () => {
   return (
     <div>
-        <Baneer/>
-        <Slider />
-      <Latest/>
+      <Baneer />
+      <Slider />
+      <Latest />
       <Mobile />
       <Laptop />
-      <Footer/>
+      <Footer />
     </div>
   )
 }

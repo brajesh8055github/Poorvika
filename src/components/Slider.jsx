@@ -22,7 +22,7 @@ const ImageSlider = () => {
   }, [images.length]);
 
   return (
-    <div className="relative w-full mx-auto">
+    <div className="relative w-full mx-auto z-0">
       <div className="overflow-hidden">
         <div
           className="flex transition-transform duration-1000"

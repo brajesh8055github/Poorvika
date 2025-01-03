@@ -54,6 +54,7 @@ const Latest = () => {
         price: product.price,
         description: product.description,
         image: product.image,
+        discount: product.discount
       },
     });
   };
@@ -79,7 +80,7 @@ const Latest = () => {
       </div>
 
       <div className="p-4">
-        <h2 className="text-xl font-bold mb-4">Explore the Latest</h2>
+        <h2 className="text-xl font-bold mb-4">Collections</h2>
         <div className="relative flex items-center">
           {/* Left Button */}
           <button
@@ -90,30 +91,40 @@ const Latest = () => {
           </button>
 
           {/* Product Cards */}
-          <div className="flex space-x-4 overflow-x-auto scrollbar-hide collection">
-            {collections.map((product) => (
-              <div
-                key={product.id}
-                className="min-w-[200px] bg-white shadow-md rounded-md p-4 flex-shrink-0 cursor-pointer"
-                onClick={() => CardHandler(product)}
-              >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="h-40 w-full object-cover rounded-md"
-                />
-                <h3 className="text-md font-semibold mt-2">{product.name}</h3>
-                <p className="text-sm text-gray-500">{product.description}</p>
-                <div className="flex items-center justify-between mt-2">
-                  <span className="text-lg font-bold text-orange-500">
-                    ₹{product.price}
-                  </span>
-                  <span className="text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
-                    {product.discount}
-                  </span>
+          <div className="flex space-x-4 overflow-x-auto scrollbar-hide laptop">
+            {collections.map((product) => {
+              const discountedPrice = product.price - parseInt(product.discount.split("₹")[1].replace(",", ""));
+              const discountPercentage = ((parseInt(product.discount.split("₹")[1].replace(",", "")) / product.price) * 100).toFixed(1);
+
+              return (
+                <div
+                  key={product.id}
+                  className="min-w-[200px] bg-white shadow-md rounded-md p-4 flex-shrink-0 cursor-pointer"
+                  onClick={() => CardHandler(product)}
+                >
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-40 w-full object-cover rounded-md"
+                  />
+                  <h3 className="text-md font-semibold mt-2">{product.name}</h3>
+                  <p className="text-sm text-gray-500">{product.description}</p>
+                  <div className="flex items-center justify-between mt-2">
+                    <div>
+                      <span className="text-lg font-bold text-orange-500">
+                        ₹{discountedPrice}
+                      </span>
+                      <span className="text-sm text-gray-400 line-through ml-2">
+                        ₹{product.price}
+                      </span>
+                    </div>
+                    <span className="text-sm bg-black text-white px-2 py-1">
+                      {discountPercentage}% Off
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Right Button */}
@@ -125,7 +136,6 @@ const Latest = () => {
           </button>
         </div>
       </div>
-      {/* <Footer /> */}
     </>
   );
 };
