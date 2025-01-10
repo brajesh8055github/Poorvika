@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useRef } from "react";
 
 const collections = [
   {
@@ -46,6 +47,7 @@ const collections = [
 
 const Latest = () => {
   const navigate = useNavigate();
+  const containerRef = useRef(null);
 
   const CardHandler = (product) => {
     navigate("/item-details", {
@@ -60,13 +62,15 @@ const Latest = () => {
   };
 
   const scrollLeft = () => {
-    const container = document.querySelector(".collection");
-    container.scrollBy({ left: -200, behavior: "smooth" });
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: -250, behavior: "smooth" }); 
+    }
   };
 
   const scrollRight = () => {
-    const container = document.querySelector(".collection");
-    container.scrollBy({ left: 200, behavior: "smooth" });
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: 250, behavior: "smooth" }); 
+    }
   };
 
   return (
@@ -91,7 +95,10 @@ const Latest = () => {
           </button>
 
           {/* Product Cards */}
-          <div className="flex space-x-4 overflow-x-auto scrollbar-hide laptop">
+          <div
+            ref={containerRef}
+            className="flex space-x-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory mobile"
+          >
             {collections.map((product) => {
               const discountedPrice = product.price - parseInt(product.discount.split("₹")[1].replace(",", ""));
               const discountPercentage = ((parseInt(product.discount.split("₹")[1].replace(",", "")) / product.price) * 100).toFixed(1);
